@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Will You Be My Forever? 💖</title>
+  <!-- Google Fonts for elegant typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(145deg, #fbe9f0 0%, #ffd9e8 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* floating hearts animation */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 105, 180, 0.2);
+      font-size: 1.2rem;
+      user-select: none;
+      animation: floatHeart 12s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* main card */
+    .proposal-card {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(0px);
+      border-radius: 56px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2), 0 10px 25px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255,255,255,0.8);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 215, 215, 0.6);
+    }
+
+    .proposal-card:hover {
+      transform: scale(1.01);
+    }
+
+    /* photo section / romantic header */
+    .rose-header {
+      background: linear-gradient(135deg, #b3406c, #e06c9f);
+      padding: 2.2rem 1rem 1.8rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .avatar-circle {
+      width: 110px;
+      height: 110px;
+      background: #fff0f5;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+      border: 4px solid #ffdbdb;
+    }
+
+    .avatar-circle i {
+      font-size: 4.2rem;
+      color: #c7467a;
+      filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .rose-header h2 {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .rose-header p {
+      color: #ffe2f0;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-top: 0.4rem;
+    }
+
+    /* content section */
+    .content-inner {
+      padding: 2.2rem 2rem 2rem;
+    }
+
+    .love-letter {
+      background: #fffafc;
+      border-radius: 32px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 14px rgba(200, 100, 130, 0.1);
+      border: 1px solid #ffe2ec;
+      transition: all 0.2s;
+    }
+
+    .love-letter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: #a13862;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 5px solid #e06c9f;
+      padding-left: 1rem;
+    }
+
+    .love-letter p {
+      font-size: 1.08rem;
+      line-height: 1.55;
+      color: #2d2f36;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .signature {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      text-align: right;
+      color: #b84c78;
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
+
+    /* countdown timer */
+    .countdown-box {
+      background: #fef2f7;
+      border-radius: 40px;
+      padding: 0.8rem 1.5rem 1.3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      border: 1px solid #ffe0ec;
+    }
+
+    .countdown-box p {
+      font-weight: 600;
+      color: #be5e88;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .timer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .timer-block {
+      background: white;
+      border-radius: 28px;
+      padding: 0.6rem 0;
+      flex: 1;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+      text-align: center;
+      border-bottom: 3px solid #f2afc5;
+    }
+
+    .timer-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #b23b68;
+      font-family: monospace;
+      letter-spacing: 2px;
+    }
+
+    .timer-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #9f607b;
+    }
+
+    /* question area */
+    .proposal-question {
+      text-align: center;
+      margin: 1.8rem 0 1.5rem;
+    }
+
+    .big-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #902d56;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: #ffeef4;
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    }
+
+    .btn-yes {
+      background: #e86f9e;
+      color: white;
+      border: 1px solid #ffc0d8;
+    }
+
+    .btn-yes:hover {
+      background: #c94f7e;
+      transform: scale(1.02);
+      box-shadow: 0 12px 20px rgba(200, 70, 110, 0.3);
+    }
+
+    .btn-no {
+      background: #f3e1ea;
+      color: #a54872;
+      border: 1px solid #ffcfdf;
+    }
+
+    .btn-no:hover {
+      background: #f0d3e0;
+      transform: scale(0.98);
+    }
+
+    /* response message */
+    .response-message {
+      text-align: center;
+      margin-top: 2rem;
+      background: #fce9f1;
+      padding: 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #9c3f64;
+      transition: all 0.3s;
+      border: 1px solid #ffcddf;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* small gift reveal */
+    .gift-section {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .surprise-btn {
+      background: none;
+      border: none;
+      color: #b3557e;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+    .surprise-btn:hover {
+      background: #ffe2ef;
+    }
+
+    /* modal for surprise ring */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.2s;
+    }
+    .modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-content {
+      background: white;
+      max-width: 320px;
+      width: 85%;
+      border-radius: 48px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+    .modal.active .modal-content {
+      transform: scale(1);
+    }
+    .modal-content i {
+      font-size: 3.5rem;
+      color: #e38bb0;
+      margin-bottom: 1rem;
+    }
+    .modal-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: #9f3f65;
+    }
+    .modal-content p {
+      margin: 1rem 0;
+      color: #4a2c38;
+    }
+    .close-modal {
+      background: #e86f9e;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      margin-top: 0.6rem;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0 1.2rem;
+      font-size: 0.7rem;
+      color: #b1869b;
+      border-top: 1px solid #ffdde9;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .content-inner {
+        padding: 1.5rem;
+      }
+      .big-question {
+        font-size: 1.5rem;
+      }
+      .timer-number {
+        font-size: 1.2rem;
+      }
+      .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="floating-hearts" id="heartsContainer"></div>
+
+<div class="proposal-card">
+  <div class="rose-header">
+    <div class="avatar-circle">
+      <i class="fas fa-heartbeat"></i> <!-- Or better: infinite love icon -->
+    </div>
+    <h2>My Dearest Love,</h2>
+    <p>✨ Every love story is beautiful, but ours is my favorite ✨</p>
+  </div>
+  
+  <div class="content-inner">
+    <div class="love-letter">
+      <h3><i class="fas fa-feather-alt"></i> A Little Note</h3>
+      <p>
+        From the moment you walked into my life, every sunrise became brighter and every laugh felt deeper. 
+        You’ve made my world softer, kinder, and full of magic. I still remember the way you smiled at me 
+        that first time — and I knew, right there, that I wanted to spend forever making you smile like that.
+      </p>
+      <p>
+        Being with you has taught me what true partnership feels like: the late night talks, the silly dances 
+        in the kitchen, the silent support when life gets heavy. You are my peace and my adventure. 
+        Today, I'm not just asking you a question — I'm giving you my whole heart, and hoping you'll let me 
+        hold yours for always.
+      </p>
+      <div class="signature">
+        Yours endlessly, <br> [Your Name] 💌
+      </div>
+    </div>
+
+    <!-- Romantic Countdown to our special moment (just for fun / memorable) -->
+    <div class="countdown-box">
+      <p><i class="far fa-clock"></i>  Time until our forever begins...  <i class="far fa-heart"></i></p>
+      <div class="timer" id="timer">
+        <div class="timer-block"><span class="timer-number" id="days">00</span><div class="timer-label">Days</div></div>
+        <div class="timer-block"><span class="timer-number" id="hours">00</span><div class="timer-label">Hours</div></div>
+        <div class="timer-block"><span class="timer-number" id="minutes">00</span><div class="timer-label">Mins</div></div>
+        <div class="timer-block"><span class="timer-number" id="seconds">00</span><div class="timer-label">Secs</div></div>
+      </div>
+      <p style="font-size: 0.8rem; margin-top: 12px;">💕 Every second brings us closer to an amazing future 💕</p>
+    </div>
+
+    <!-- THE BIG QUESTION -->
+    <div class="proposal-question">
+      <div class="big-question">
+        <i class="fas fa-gem"></i> Will you marry me? <i class="fas fa-gem"></i>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-yes" id="yesBtn"><i class="fas fa-check-circle"></i> Absolutely Yes</button>
+        <button class="btn btn-no" id="noBtn"><i class="fas fa-heart-broken"></i> ...No way</button>
+      </div>
+      <div id="responseMessage" class="response-message hidden">
+        <!-- dynamic response appears here -->
+      </div>
+    </div>
+
+    <!-- Secret surprise ring (extra romance) -->
+    <div class="gift-section">
+      <button class="surprise-btn" id="surpriseRingBtn"><i class="fas fa-gift"></i> Click for a little surprise ✨</button>
+    </div>
+    <footer>
+      Made with infinite love for my special girl 🌹
+    </footer>
+  </div>
+</div>
+
+<!-- Surprise Modal (Ring reveal) -->
+<div id="ringModal" class="modal">
+  <div class="modal-content">
+    <i class="fas fa-ring"></i>
+    <h3>💍 A Promise Ring 💍</h3>
+    <p>This is just a tiny glimpse of the forever I dream of. I'll spend my life making you happy — I love you more than all the stars.</p>
+    <button class="close-modal" id="closeModalBtn">✨ So sweet ✨</button>
+  </div>
+</div>
+
+<script>
+  // ----------------------------------------------
+  // 1) Floating Hearts Effect (background romantic)
+  // ----------------------------------------------
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '<i class="fas fa-heart"></i>';
+    const size = Math.random() * 18 + 10;
+    heart.style.fontSize = size + 'px';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDuration = Math.random() * 8 + 6 + 's';
+    heart.style.animationDelay = Math.random() * 5 + 's';
+    heart.style.opacity = Math.random() * 0.5 + 0.2;
+    document.getElementById('heartsContainer').appendChild(heart);
+    setTimeout(() => {
+      heart.remove();
+    }, 12000);
+  }
+  setInterval(createHeart, 700);
+
+  // ----------------------------------------------
+  // 2) Countdown Timer (set to a meaningful future date: e.g., next anniversary or upcoming special day)
+  //    I'll set target to one year from today + 3 days to symbolize future proposal moment? 
+  //    Let's set a romantic default:  current time + 7 days at 20:00 (evening proposal vibe)
+  //    But to make it personal: you can edit the target date. For demo, let's set one month from now + 3 days?
+  //    More fun: we set for next Saturday at 7:00 PM (romantic evening)
+  //    Actually, we'll set to 2 months from today at 7:00 PM as a placeholder for "our engagement night".
+  //    But user can adjust: we take today + 32 days (easy config)
+  //    Let's put a variable: "proposalGoalDate" — you can replace to exact date string.
+  //    For demonstration: 45 days from now, 8:00 PM.
+  
+  let targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 45);
+  targetDate.setHours(20, 0, 0, 0); // 8:00 PM evening romance
+  
+  // If you want to set a specific meaningful date, uncomment and edit below:
+  // targetDate = new Date("December 25, 2026 20:00:00");  // example
+  
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate.getTime() - now;
+    
+    if (distance < 0) {
+      // Countdown finished - we reached the special day!
+      document.getElementById('days').innerText = '00';
+      document.getElementById('hours').innerText = '00';
+      document.getElementById('minutes').innerText = '00';
+      document.getElementById('seconds').innerText = '00';
+      const timerBox = document.querySelector('.countdown-box p:first-child');
+      if(timerBox) timerBox.innerHTML = "<i class='fas fa-champagne-glasses'></i>  Our special moment has arrived!  <i class='fas fa-heart'></i>";
+      return;
+    }
+    
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (86400000)) / (3600000));
+    const minutes = Math.floor((distance % 3600000) / 60000);
+    const seconds = Math.floor((distance % 60000) / 1000);
+    
+    document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+    document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+    document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  
+  // ----------------------------------------------
+  // 3) Proposal interaction (Yes / No)
+  // ----------------------------------------------
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const responseDiv = document.getElementById('responseMessage');
+  
+  // Confetti effect using canvas + simple library? We'll implement quick confetti function:
+  function createConfetti() {
+    // simple canvas confetti burst
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '999';
+    document.body.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let particles = [];
+    const colors = ['#f9a8d4', '#fbc4d4', '#ffb7c5', '#ff8eb5', '#e56b9a', '#ffb3d1'];
+    for(let i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speedX: (Math.random() - 0.5) * 4,
+        speedY: Math.random() * 7 + 6,
+        rotation: Math.random() * 360,
+        spin: (Math.random() - 0.5) * 8
+      });
+    }
+    
+    let animationId;
+    let start = null;
+    function animateConfetti(timestamp) {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      if (elapsed > 3500) {
+        canvas.remove();
+        cancelAnimationFrame(animationId);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+        ctx.restore();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.rotation += p.spin;
+        if (p.y > canvas.height + 50) p.y = -50;
+        if (p.x < -50) p.x = canvas.width + 30;
+        if (p.x > canvas.width + 50) p.x = -30;
+      }
+      animationId = requestAnimationFrame(animateConfetti);
+    }
+    animationId = requestAnimationFrame(animateConfetti);
+  }
+  
+  // Yes action — pure joy
+  yesBtn.addEventListener('click', () => {
+    responseDiv.classList.remove('hidden');
+    responseDiv.innerHTML = '<i class="fas fa-heart" style="color:#e05a8a;"></i> YES! You’ve just made me the happiest person in the universe. I promise to love you every single day, forever. 💍❤️ <i class="fas fa-heart"></i>';
+    responseDiv.style.background = "#f0d9e4";
+    // trigger confetti explosion
+    createConfetti();
+    // extra special: change background temporarily or add hearts
+    for(let i = 0; i < 20; i++) {
+      setTimeout(() => createHeart(), i * 100);
+    }
+    // disable no button to avoid confusion
+    noBtn.disabled = true;
+    noBtn.style.opacity = "0.6";
+    noBtn.style.cursor = "default";
+    // optional: play imaginary sweet message
+    // Also show ring surprise automatically? could be nice
+    setTimeout(() => {
+      const modal = document.getElementById('ringModal');
+      modal.classList.add('active');
+    }, 800);
+  });
+  
+  // No button trick: sweet rejection with moving button? But we'll keep it playful and loving
+  let noClickCount = 0;
+  noBtn.addEventListener('click', () => {
+    noClickCount++;
+    if (noClickCount === 1) {
+      responseDiv.classList.remove('hidden');
+      responseDiv.innerHTML = '😢 Oh... maybe you mis-clicked? But I know deep in your heart, you love me. Try the "Absolutely Yes" button? 💕';
+      responseDiv.style.background = "#fff0f5";
+    } else if (noClickCount === 2) {
+      responseDiv.innerHTML = 'Wait... are you joking? Rethink? 😄 I can’t imagine my life without you. Let’s try the Yes button, my love.';
+    } else if (noClickCount >= 3) {
+      responseDiv.innerHTML = 'Alright, you little tease! But I know it’s a YES! 💖 (The Yes button is waiting for you.)';
+      // Add some playful shake to no button?
+      noBtn.style.transform = "translateX(4px)";
+      setTimeout(() => noBtn.style.transform = "", 200);
+    }
+    // Also gently move the 'No' button but not too harsh — keep playful
+    const randomX = (Math.random() - 0.5) * 8;
+    const randomY = (Math.random() - 0.5) * 6;
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    setTimeout(() => { if(noClickCount<5) noBtn.style.transform = ""; }, 250);
+    if(noClickCount === 5) {
+      responseDiv.innerHTML = 'Okay my love, I know the truth. Let me see that gorgeous smile — press the YES button for me? 🌹';
+      noBtn.disabled = true;
+      noBtn.style.opacity = "0.5";
+    }
+  });
+  
+  // Surprise Ring Modal logic
+  const surpriseBtn = document.getElementById('surpriseRingBtn');
+  const modal = document.getElementById('ringModal');
+  const closeModal = document.getElementById('closeModalBtn');
+  
+  surpriseBtn.addEventListener('click', () => {
+    modal.classList.add('active');
+  });
+  
+  closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+  
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.classList.remove('active');
+  });
+  
+  // a little extra confetti on page load just for joy (light)
+  setTimeout(() => {
+    for(let i=0;i<40;i++) createHeart(); // instant little hearts
+  }, 800);
+  
+  // optional: set your name placeholder — the love letter uses "[Your Name]" but we can dynamically replace?
+  // simple fallback: replace [Your Name] with a cute nickname if you want to edit
+  const signatureElem = document.querySelector('.signature');
+  if(signatureElem && signatureElem.innerText.includes('[Your Name]')) {
+    signatureElem.innerHTML = signatureElem.innerHTML.replace('[Your Name]', 'Your Future Husband 💕');
+  }
+  
+  // For a sweet change: "Your Future Husband" is lovely but user can override. No extra settings needed.
+  // plus small romantic touch: update the avatar circle with a ring icon?
+  const avatarIcon = document.querySelector('.avatar-circle i');
+  if(avatarIcon) avatarIcon.className = "fas fa-heart"; // just a big heart
+  
+</script>
+</body>
+</html>
